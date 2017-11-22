@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####---- global variables ----begin####
-export tengine_version=2.1.2
+export tengine_version=2.2.1
 export mysql_version=5.6.38
 export vsftpd_version=2.2.2
 export install_ftp_version=0.0.0
@@ -128,7 +128,7 @@ echo "---------- env ok ----------" >> tmp.log
 echo "---------- ${mysql_dir} ok ----------" >> tmp.log
 
 ./tengine/install_tengine.sh
-echo "---------- tengine-2.1.2 ok ----------" >> tmp.log
+echo "---------- tengine-2.2.1 ok ----------" >> tmp.log
 ####install multi php####
 #$php56
 for php_version in $php56

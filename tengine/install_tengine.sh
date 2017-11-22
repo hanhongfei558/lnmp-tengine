@@ -1,12 +1,12 @@
 #!/bin/bash
 INSTALLDIR=`pwd`
 ##########################
- rm -rf jemalloc-4.5.0
- if [ ! -f jemalloc-4.5.0.tar.bz2 ];then
-     wget https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2
+ rm -rf jemalloc-3.6.0
+ if [ ! -f jemalloc-3.6.0.tar.bz2 ];then
+     wget https://github.com/jemalloc/jemalloc/releases/download/3.6.0/jemalloc-3.6.0.tar.bz2
  fi
-tar jxvf jemalloc-4.5.0.tar.bz2
-cd jemalloc-4.5.0
+tar jxvf jemalloc-3.6.0.tar.bz2
+cd jemalloc-3.6.0
 ./configure
 make
 make install
@@ -18,12 +18,12 @@ tar zxvf openssl-1.0.2m.tar.gz
 groupadd  www
 useradd -g www www
 mkdir /alidata/server/nginx/logs -p
- rm -rf  tengine-2.1.2 
- if [ ! -f tengine-2.1.2.tar.gz ];then
-    wget http://tengine.taobao.org/download/tengine-2.1.2.tar.gz
+ rm -rf  tengine-2.2.1 
+ if [ ! -f tengine-2.2.1.tar.gz ];then
+    wget http://tengine.taobao.org/download/tengine-2.2.1.tar.gz
  fi
-tar zxvf tengine-2.1.2.tar.gz
-cd tengine-2.1.2
+tar zxvf tengine-2.2.1.tar.gz
+cd tengine-2.2.1
 ./configure --prefix=/alidata/server/nginx \
   --user=www \
   --group=www \
@@ -35,7 +35,7 @@ cd tengine-2.1.2
   --with-openssl=$INSTALLDIR/openssl-1.0.2m \
   --with-zlib=$INSTALLDIR/zlib-1.2.11 \
   --with-pcre=$INSTALLDIR/pcre-8.41 \
-  --with-jemalloc=$INSTALLDIR/jemalloc-4.5.0
+  --with-jemalloc=$INSTALLDIR/jemalloc-3.6.0
 CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
 if [ $CPU_NUM -gt 1 ];then
     make -j $CPU_NUM
