@@ -1,15 +1,15 @@
 #!/bin/bash
-if ls /usr/local/ssl > /dev/null ;then
-	if openssl version -a |grep "OpenSSL 1.0.2m"  > /dev/null;then 
-		exit 0
-	fi
-fi
 CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
 rm -rf openssl-1.0.2m
 if [ ! -f openssl-1.0.2m.tar.gz ];then
 	wget https://www.openssl.org/source/openssl-1.0.2m.tar.gz
 fi
 tar zxvf openssl-1.0.2m.tar.gz
+if ls /usr/local/ssl > /dev/null ;then
+	if openssl version -a |grep "OpenSSL 1.0.2m"  > /dev/null;then 
+		exit 0
+	fi
+fi
 cd openssl-1.0.2m
 \mv /usr/local/ssl /usr/local/ssl.OFF
 ./config shared zlib enable-tlsext
