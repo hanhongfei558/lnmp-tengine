@@ -2,7 +2,7 @@
 
 ####---- global variables ----begin####
 export tengine_version=2.1.2
-export mysql_version=5.6.38
+export mysql_version=
 export vsftpd_version=2.2.2
 export install_ftp_version=0.0.0
 
@@ -30,7 +30,6 @@ fi
 ####---- global variables ----begin####
 export web
 export web_dir
-export mysql_dir=mysql-${mysql_version}
 export vsftpd_dir=vsftpd-${vsftpd_version}
 export php56_dir
 ####---- global variables ----end####
@@ -124,9 +123,6 @@ echo "---------- make dir ok ----------" >> tmp.log
 ./env/update_openssl.sh
 echo "---------- env ok ----------" >> tmp.log
 
-./mysql/install_${mysql_dir}.sh
-echo "---------- ${mysql_dir} ok ----------" >> tmp.log
-
 ./tengine/install_tengine.sh
 echo "---------- tengine-2.1.2 ok ----------" >> tmp.log
 ####install multi php####
@@ -148,26 +144,15 @@ install_ftp_version=$(vsftpd -v 0> vsftpd_version && cat vsftpd_version |awk -F:
 echo "---------- vsftpd-$install_ftp_version  ok ----------" >> tmp.log
 
 
-####---- mysql password initialization ----begin####
-TMP_PASS=$(date | md5sum |head -c 10)
-/alidata/server/mysql/bin/mysqladmin -u root password "$TMP_PASS"
-sed -i s/'mysql_password_value'/${TMP_PASS}/g account.log
-echo "---------- mysql init ok ----------" >> tmp.log
-####---- mysql password initialization ----end####
-
-
 ####---- Environment variable settings ----begin####
-if ! cat /etc/profile | grep "export PATH=$PATH:/alidata/server/nginx/sbin:/alidata/server/mysql/bin:/alidata/server/php/sbin:/alidata/server/php/bin" &> /dev/null;then
-    echo 'export PATH=$PATH:/alidata/server/nginx/sbin:/alidata/server/mysql/bin:/alidata/server/php/sbin:/alidata/server/php/bin' >> /etc/profile
+if ! cat /etc/profile | grep "export PATH=$PATH:/alidata/server/nginx/sbin:/alidata/server/php/sbin:/alidata/server/php/bin" &> /dev/null;then
+    echo 'export PATH=$PATH:/alidata/server/nginx/sbin:/alidata/server/php/sbin:/alidata/server/php/bin' >> /etc/profile
+    #export PATH=$PATH:/alidata/server/nginx/sbin:/alidata/server/php/sbin:/alidata/server/php/bin
 fi
 source /etc/profile
 ####---- Environment variable settings ----end####
 
 ####---- Start command is written to the rc.local ----begin####
-if ! cat /etc/rc.local | grep "/etc/init.d/mysqld" > /dev/null;then 
-    echo "/etc/init.d/mysqld start" >> /etc/rc.local
-fi
-
 if ! cat /etc/rc.local | grep "/etc/init.d/php-fpm start" &> /dev/null;then
     echo "/etc/init.d/php-fpm start" >> /etc/rc.local
 fi
@@ -183,7 +168,6 @@ fi
 ####---- Start command is written to the rc.local ----end####
 echo "---------- rc init ok ----------" >> tmp.log
 
-
 ####---- centos yum configuration----begin####
 if [ "$ifcentos" != "" ] && [ "$machine" == "x86_64" ];then
 sed -i 's/^#exclude/exclude/' /etc/yum.conf
@@ -197,7 +181,6 @@ fi
 ####---- centos yum configuration ----end####
 
 ####---- restart ----begin####
-/etc/init.d/mysqld  restart &> /dev/null
 /etc/init.d/php-fpm restart &> /dev/null
 /etc/init.d/nginx restart &> /dev/null
 /etc/init.d/vsftpd restart &> /dev/null

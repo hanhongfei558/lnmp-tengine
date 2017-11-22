@@ -1,19 +1,19 @@
 #!/bin/bash
 INSTALLDIR=`pwd`
 ##########################
- rm -rf jemalloc-3.6.0
- if [ ! -f jemalloc-3.6.0.tar.bz2 ];then
-     wget https://github.com/jemalloc/jemalloc/releases/download/3.6.0/jemalloc-3.6.0.tar.bz2
+ rm -rf jemalloc-4.5.0
+ if [ ! -f jemalloc-4.5.0.tar.bz2 ];then
+     wget https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2
  fi
-tar jxvf jemalloc-3.6.0.tar.bz2
-cd jemalloc-3.6.0
+tar jxvf jemalloc-4.5.0.tar.bz2
+cd jemalloc-4.5.0
 ./configure
 make
 make install
 cd ..
 
-rm -rf openssl-1.0.2j
-tar zxvf openssl-1.0.2j.tar.gz
+rm -rf openssl-1.0.2m
+tar zxvf openssl-1.0.2m.tar.gz
 ##########################
 groupadd  www
 useradd -g www www
@@ -32,10 +32,10 @@ cd tengine-2.1.2
   --with-http_gzip_static_module \
   --with-http_concat_module=shared \
   --with-http_flv_module \
-  --with-openssl=$INSTALLDIR/openssl-1.0.2j \
-  --with-zlib=$INSTALLDIR/zlib-1.2.8 \
-  --with-pcre=$INSTALLDIR/pcre-8.36 \
-  --with-jemalloc=$INSTALLDIR/jemalloc-3.6.0
+  --with-openssl=$INSTALLDIR/openssl-1.0.2m \
+  --with-zlib=$INSTALLDIR/zlib-1.2.11 \
+  --with-pcre=$INSTALLDIR/pcre-8.41 \
+  --with-jemalloc=$INSTALLDIR/jemalloc-4.5.0
 CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
 if [ $CPU_NUM -gt 1 ];then
     make -j $CPU_NUM

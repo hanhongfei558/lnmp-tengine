@@ -45,10 +45,8 @@ killall vsftpd &> /dev/null
 killall php-fpm &> /dev/null
 
 echo "--------> Clean up the installation environment"
-rm -rf /usr/local/freetype.2.1.10
-rm -rf /usr/local/libpng.1.2.50
-rm -rf /usr/local/freetype.2.1.10
-rm -rf /usr/local/libpng.1.2.50
+rm -rf /usr/local/freetype.2.8.1
+rm -rf /usr/local/libpng.1.2.59
 rm -rf /usr/local/jpeg.6
 
 echo ""
@@ -76,11 +74,6 @@ echo "/alidata/log/mysql                delete ok!"
 rm -rf /alidata/log/mysql
 echo "/alidata/log/nginx                delete ok!"
 rm -rf /alidata/log/nginx
-
-echo ""
-echo "/alidata/www/phpwind              delete ok!"
-rm -rf /alidata/www/phpwind
-
 
 echo ""
 echo "--------> Delete file"
@@ -124,7 +117,7 @@ fi
 
 echo ""
 echo "/etc/profile                    clean ok!"
-sed -i "/export PATH=\$PATH\:\/alidata\/server\/mysql\/bin.*/d" /etc/profile
+sed -i "/export PATH=\$PATH\:\/alidata\/server\/nginx\/sbin.*/d" /etc/profile
 source /etc/profile
 
 echo ""

@@ -9,19 +9,19 @@ else
 machine=i686
 fi
 if [ $machine == "x86_64" ];then
-  rm -rf mysql-5.6.34-linux-glibc2.5-x86_64
-  if [ ! -f mysql-5.6.34-linux-glibc2.5-x86_64.tar.gz ];then
-	 wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.34-linux-glibc2.5-x86_64.tar.gz
+  rm -rf mysql-5.6.38-linux-glibc2.12-x86_64
+  if [ ! -f mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz ];then
+	 wget https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz
   fi
-  tar -xzvf mysql-5.6.34-linux-glibc2.5-x86_64.tar.gz
-  mv mysql-5.6.34-linux-glibc2.5-x86_64/* /alidata/server/mysql
+  tar -xzvf mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz
+  mv mysql-5.6.38-linux-glibc2.12-x86_64/* /alidata/server/mysql
 else
-  rm -rf mysql-5.6.34-linux-glibc2.5-i686
-  if [ ! -f mysql-5.6.34-linux-glibc2.5-i686.tar.gz ];then
-  wget http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.34-linux-glibc2.5-i686.tar.gz
+  rm -rf mysql-5.6.38-linux-glibc2.12-i686
+  if [ ! -f mysql-5.6.38-linux-glibc2.12-i686.tar.gz ];then
+  wget https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.38-linux-glibc2.12-i686.tar.gz
   fi
-  tar -xzvf mysql-5.6.34-linux-glibc2.5-i686.tar.gz
-  mv mysql-5.6.34-linux-glibc2.5-i686/* /alidata/server/mysql
+  tar -xzvf mysql-5.6.38-linux-glibc2.12-i686.tar.gz
+  mv mysql-5.6.38-linux-glibc2.12-i686/* /alidata/server/mysql
 fi
 
 if [ "$ifubuntu" != "" ] && [ "$if14" != "" ];then
@@ -31,6 +31,7 @@ fi
 groupadd mysql
 useradd -g mysql -s /sbin/nologin mysql
 /alidata/server/mysql/scripts/mysql_install_db --datadir=/alidata/server/mysql/data/ --basedir=/alidata/server/mysql --user=mysql
+touch /alidata/log/mysql/error.log
 chown -R mysql:mysql /alidata/server/mysql/
 chown -R mysql:mysql /alidata/server/mysql/data/
 chown -R mysql:mysql /alidata/log/mysql

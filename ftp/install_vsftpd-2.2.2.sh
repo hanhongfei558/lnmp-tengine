@@ -67,4 +67,4 @@ else
 echo "www:$PASS" | chpasswd
 fi
 
-sed -i s/'ftp_password'/${PASS}/g account.log
+sed -i s/'ftp_password_value'/${PASS}/g account.log

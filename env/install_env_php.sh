@@ -1,12 +1,12 @@
 #!/bin/sh
 
 CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
-if [ ! -f libiconv-1.13.1.tar.gz ];then
-	wget http://oss.aliyuncs.com/aliyunecs/onekey/libiconv-1.13.1.tar.gz
+if [ ! -f libiconv-1.15.tar.gz ];then
+	wget https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
 fi
-rm -rf libiconv-1.13.1
-tar zxvf libiconv-1.13.1.tar.gz
-cd libiconv-1.13.1
+rm -rf libiconv-1.15
+tar zxvf libiconv-1.15.tar.gz
+cd libiconv-1.15
 ./configure --prefix=/usr/local
 if [ $CPU_NUM -gt 1 ];then
     make -j$CPU_NUM
@@ -16,12 +16,12 @@ fi
 make install
 cd ..
 
-if [ ! -f zlib-1.2.8.tar.gz ];then
-	wget http://zy-res.oss-cn-hangzhou.aliyuncs.com/zlib/zlib-1.2.8.tar.gz
+if [ ! -f zlib-1.2.11.tar.gz ];then
+	wget http://www.zlib.net/zlib-1.2.11.tar.gz
 fi
-rm -rf zlib-1.2.8
-tar zxvf zlib-1.2.8.tar.gz
-cd zlib-1.2.8
+rm -rf zlib-1.2.11
+tar zxvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11
 ./configure
 if [ $CPU_NUM -gt 1 ];then
     make CFLAGS=-fpic -j$CPU_NUM
@@ -31,13 +31,13 @@ fi
 make install
 cd ..
 
-if [ ! -f freetype-2.1.10.tar.gz ];then
-	wget http://oss.aliyuncs.com/aliyunecs/onekey/freetype-2.1.10.tar.gz
+if [ ! -f freetype-2.8.1.tar.gz ];then
+	wget https://download.savannah.gnu.org/releases/freetype/freetype-2.8.1.tar.gz
 fi
-rm -rf freetype-2.1.10
-tar zxvf freetype-2.1.10.tar.gz
-cd freetype-2.1.10
-./configure --prefix=/usr/local/freetype.2.1.10
+rm -rf freetype-2.8.1
+tar zxvf freetype-2.8.1.tar.gz
+cd freetype-2.8.1
+./configure --prefix=/usr/local/freetype.2.8.1
 if [ $CPU_NUM -gt 1 ];then
     make -j$CPU_NUM
 else
@@ -46,14 +46,13 @@ fi
 make install
 cd ..
 
-if [ ! -f libpng-1.2.50.tar.gz ];then
-	#wget http://soft.phpwind.me/web/libpng-1.2.8.tar.gz
-    wget http://oss.aliyuncs.com/aliyunecs/onekey/libpng-1.2.50.tar.gz
+if [ ! -f libpng-1.2.59.tar.gz ];then
+    wget ftp://ftp-osl.osuosl.org/pub/libpng/src/libpng12/libpng-1.2.59.tar.gz
 fi
-rm -rf libpng-1.2.50
-tar zxvf libpng-1.2.50.tar.gz
-cd libpng-1.2.50
-./configure --prefix=/usr/local/libpng.1.2.50
+rm -rf libpng-1.2.59
+tar zxvf libpng-1.2.59.tar.gz
+cd libpng-1.2.59
+./configure --prefix=/usr/local/libpng.1.2.59
 if [ $CPU_NUM -gt 1 ];then
     make CFLAGS=-fpic -j$CPU_NUM
 else
@@ -97,12 +96,12 @@ make
 make install
 cd ../..
 
-if [ ! -f pcre-8.36.tar.gz ];then
-	wget http://zy-res.oss-cn-hangzhou.aliyuncs.com/pcre/pcre-8.36.tar.gz
+if [ ! -f pcre-8.41.tar.gz ];then
+	wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.41.tar.gz
 fi
-rm -rf pcre-8.36
-tar zxvf pcre-8.36.tar.gz
-cd pcre-8.36
+rm -rf pcre-8.41
+tar zxvf pcre-8.41.tar.gz
+cd pcre-8.41
 ./configure
 if [ $CPU_NUM -gt 1 ];then
     make -j$CPU_NUM
@@ -157,10 +156,10 @@ cat > account.log << END
 
 FTP:
 account:www
-ftp_password:ftp_password
+ftp_password:ftp_password_value
 
 MySQL:
 account:root
-mysql_password:mysql_password
+mysql_password:mysql_password_value
 END
 
