@@ -11,6 +11,10 @@ php：5.6.32
 php扩展：redis
 ftp：（yum安装）
 
+依赖软件说明：
+在centos 6.X 64为系统上部署要求tengine依赖软件jemalloc版本为3.6.0
+4.0以上版本在glibc版本比较老的系统下编译tengine会报undefined reference to `clock_gettime'错误
+
 安装步骤：
 
 xshell/xftp上传lnmp-tengine目录
