@@ -38,7 +38,7 @@ fi
 mkdir -p /alidata/server/${web_dir}
 ln -s /alidata/server/${web_dir} /alidata/server/nginx
 
-for php_dir in $php56_dir
+for php_dir in $php72_dir
 do
     mkdir -p /alidata/server/${php_dir}
 done

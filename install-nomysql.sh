@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ####---- global variables ----begin####
-export tengine_version=2.2.1
+export tengine_version=2.2.2
 export mysql_version=
 export vsftpd_version=2.2.2
 export install_ftp_version=0.0.0
 
 ####---- global variables ----end####
 web=nginx
-php56=5.6.32
+php72=7.2.2
 
 
 ####---- Clean up the environment ----begin####
@@ -18,7 +18,7 @@ echo "will be installed, wait ..."
 
 
 web_dir=nginx-${tengine_version}
-php56_dir=php-${php56}
+php72_dir=php-${php72}
 
 if [ `uname -m` == "x86_64" ];then
 machine=x86_64
@@ -31,7 +31,7 @@ fi
 export web
 export web_dir
 export vsftpd_dir=vsftpd-${vsftpd_version}
-export php56_dir
+export php72_dir
 ####---- global variables ----end####
 
 
@@ -124,16 +124,16 @@ echo "---------- make dir ok ----------" >> tmp.log
 echo "---------- env ok ----------" >> tmp.log
 
 ./tengine/install_tengine.sh
-echo "---------- tengine-2.2.1 ok ----------" >> tmp.log
+echo "---------- tengine-2.2.2 ok ----------" >> tmp.log
 ####install multi php####
-#$php56
-for php_version in $php56
+#$php72
+for php_version in $php72
 do
     ./php/install_nginx_php-${php_version}.sh
 done
 
 ####set default php version####
-ln -s /alidata/server/$php56_dir  /alidata/server/php
+ln -s /alidata/server/$php72_dir  /alidata/server/php
 
 ####install php extension####
 ./php/install_php_extension.sh

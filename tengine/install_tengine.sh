@@ -18,12 +18,12 @@ tar zxvf openssl-1.0.2m.tar.gz
 groupadd  www
 useradd -g www www
 mkdir /alidata/server/nginx/logs -p
- rm -rf  tengine-2.2.1 
- if [ ! -f tengine-2.2.1.tar.gz ];then
-    wget http://tengine.taobao.org/download/tengine-2.2.1.tar.gz
+ rm -rf  tengine-2.2.2 
+ if [ ! -f tengine-2.2.2.tar.gz ];then
+    wget http://tengine.taobao.org/download/tengine-2.2.2.tar.gz
  fi
-tar zxvf tengine-2.2.1.tar.gz
-cd tengine-2.2.1
+tar zxvf tengine-2.2.2.tar.gz
+cd tengine-2.2.2
 ./configure --prefix=/alidata/server/nginx \
   --user=www \
   --group=www \

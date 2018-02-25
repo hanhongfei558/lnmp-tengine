@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PHP_DIR=/alidata/server/php-5.6.32
+PHP_DIR=/alidata/server/php-7.2.2
 
 if [ `uname -m` == "x86_64" ];then
    machine=x86_64
@@ -9,12 +9,12 @@ else
 fi
 
 
-rm -rf php-5.6.32
-if [ ! -f php-5.6.32.tar.gz ];then
-  wget http://cn2.php.net/distributions/php-5.6.32.tar.gz
+rm -rf php-7.2.2
+if [ ! -f php-7.2.2.tar.gz ];then
+  wget http://cn2.php.net/distributions/php-7.2.2.tar.gz
 fi
-tar zxvf php-5.6.32.tar.gz
-cd php-5.6.32
+tar zxvf php-7.2.2.tar.gz
+cd php-7.2.2
 ./configure --prefix=$PHP_DIR \
 --enable-opcache \
 --with-config-file-path=$PHP_DIR/etc \
@@ -57,7 +57,7 @@ else
 fi
 make install
 cd ..
-cp ./php-5.6.32/php.ini-production $PHP_DIR/etc/php.ini
+cp ./php-7.2.2/php.ini-production $PHP_DIR/etc/php.ini
 #adjust php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 64M/g' $PHP_DIR/etc/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 64M/g' $PHP_DIR/etc/php.ini
@@ -76,6 +76,6 @@ sed -i 's,;pid = run/php-fpm.pid,pid = run/php-fpm.pid,g'   $PHP_DIR/etc/php-fpm
 sed -i 's,;error_log = log/php-fpm.log,error_log = /alidata/log/php/php-fpm.log,g'   $PHP_DIR/etc/php-fpm.conf
 sed -i 's,;slowlog = log/$pool.log.slow,slowlog = /alidata/log/php/\$pool.log.slow,g'   $PHP_DIR/etc/php-fpm.conf
 
-install -v -m755 ./php-5.6.32/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
+install -v -m755 ./php-7.2.2/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
 #/etc/init.d/php-fpm start
 sleep 5
