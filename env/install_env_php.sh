@@ -76,26 +76,6 @@ fi
 make install
 cd ..
 
-if [ ! -f libmcrypt-2.5.8.tar.gz ];then
-	wget http://oss.aliyuncs.com/aliyunecs/onekey/libmcrypt-2.5.8.tar.gz
-fi
-rm -rf libmcrypt-2.5.8
-tar zxvf libmcrypt-2.5.8.tar.gz
-cd libmcrypt-2.5.8
-./configure --disable-posix-threads
-if [ $CPU_NUM -gt 1 ];then
-    make -j$CPU_NUM
-else
-    make
-fi
-make install
-/sbin/ldconfig
-cd libltdl/
-./configure --enable-ltdl-install
-make
-make install
-cd ../..
-
 if [ ! -f pcre-8.41.tar.gz ];then
 	wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.41.tar.gz
 fi

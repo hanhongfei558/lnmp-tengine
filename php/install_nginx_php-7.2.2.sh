@@ -18,11 +18,9 @@ cd php-7.2.2
 ./configure --prefix=$PHP_DIR \
 --enable-opcache \
 --with-config-file-path=$PHP_DIR/etc \
---with-mysql=mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
 --enable-fpm \
---enable-fastcgi \
 --enable-static \
 --enable-inline-optimization \
 --enable-sockets \
@@ -36,10 +34,8 @@ cd php-7.2.2
 --with-gd \
 --with-xmlrpc \
 --enable-mbstring \
---without-sqlite \
 --with-curl \
 --enable-ftp \
---with-mcrypt  \
 --with-freetype-dir=/usr/local/freetype.2.8.1 \
 --with-jpeg-dir=/usr/local/jpeg.6 \
 --with-png-dir=/usr/local/libpng.1.2.59 \
@@ -47,7 +43,6 @@ cd php-7.2.2
 --disable-debug \
 --with-openssl \
 --disable-maintainer-zts \
---disable-safe-mode
 
 CPU_NUM=$(cat /proc/cpuinfo | grep processor | wc -l)
 if [ $CPU_NUM -gt 1 ];then
