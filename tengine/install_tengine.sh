@@ -46,6 +46,7 @@ fi
 cd ..
 
 chmod 775 /alidata/server/nginx/logs
+touch /alidata/server/nginx/logs/nginx.pid
 chown -R www:www /alidata/server/nginx/logs
 chmod -R 775 /alidata/www
 chown -R www:www /alidata/www
@@ -55,4 +56,5 @@ mv /alidata/server/nginx/conf/index.php /alidata/www/default/
 chown www:www  /alidata/www/default/index.php
 mv /alidata/server/nginx/conf/nginx /etc/init.d/
 chmod +x /etc/init.d/nginx
+sleep 2
 /etc/init.d/nginx start

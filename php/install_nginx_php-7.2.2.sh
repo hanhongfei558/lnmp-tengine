@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export PKG_CONFIG_PATH=/usr/local/freetype.2.8.1/lib/pkgconfig
 PHP_DIR=/alidata/server/php-7.2.2
 
 if [ `uname -m` == "x86_64" ];then
@@ -61,16 +62,18 @@ sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=1/g' $PHP_DIR/etc/php.ini
 sed -i 's/max_execution_time = 30/max_execution_time = 300/g' $PHP_DIR/etc/php.ini
 #adjust php-fpm
 cp $PHP_DIR/etc/php-fpm.conf.default $PHP_DIR/etc/php-fpm.conf
-sed -i 's,user = nobody,user=www,g'   $PHP_DIR/etc/php-fpm.conf
-sed -i 's,group = nobody,group=www,g'   $PHP_DIR/etc/php-fpm.conf
-sed -i 's,^pm.min_spare_servers = 1,pm.min_spare_servers = 5,g'   $PHP_DIR/etc/php-fpm.conf
-sed -i 's,^pm.max_spare_servers = 3,pm.max_spare_servers = 35,g'   $PHP_DIR/etc/php-fpm.conf
-sed -i 's,^pm.max_children = 5,pm.max_children = 100,g'   $PHP_DIR/etc/php-fpm.conf
-sed -i 's,^pm.start_servers = 2,pm.start_servers = 20,g'   $PHP_DIR/etc/php-fpm.conf
 sed -i 's,;pid = run/php-fpm.pid,pid = run/php-fpm.pid,g'   $PHP_DIR/etc/php-fpm.conf
 sed -i 's,;error_log = log/php-fpm.log,error_log = /alidata/log/php/php-fpm.log,g'   $PHP_DIR/etc/php-fpm.conf
+#adjust php-fpm.d/www.conf
+cp $PHP_DIR/etc/php-fpm.d/www.conf.default $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,user = nobody,user=www,g'   $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,group = nobody,group=www,g'   $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,^pm.min_spare_servers = 1,pm.min_spare_servers = 5,g'   $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,^pm.max_spare_servers = 3,pm.max_spare_servers = 35,g'   $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,^pm.max_children = 5,pm.max_children = 100,g'   $PHP_DIR/etc/php-fpm.d/www.conf
+sed -i 's,^pm.start_servers = 2,pm.start_servers = 20,g'   $PHP_DIR/etc/php-fpm.d/www.conf
 sed -i 's,;slowlog = log/$pool.log.slow,slowlog = /alidata/log/php/\$pool.log.slow,g'   $PHP_DIR/etc/php-fpm.conf
 
 install -v -m755 ./php-7.2.2/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
-#/etc/init.d/php-fpm start
+/etc/init.d/php-fpm start
 sleep 5

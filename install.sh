@@ -55,7 +55,7 @@ if [ "$ifredhat" != "" ];then
   \cp ./res/rhel-debuginfo.repo /etc/yum.repos.d/
   yum makecache
   yum -y remove mysql MySQL-python perl-DBD-MySQL dovecot exim qt-MySQL perl-DBD-MySQL dovecot qt-MySQL mysql-server mysql-connector-odbc php-mysql mysql-bench libdbi-dbd-mysql mysql-devel-5.0.77-3.el5 httpd php mod_auth_mysql mailman squirrelmail php-pdo php-common php-mbstring php-cli &> /dev/null
-  yum -y install gcc gcc-c++ gcc-g77 make libtool autoconf patch unzip bzip2 automake fiex* libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl libpng libpng-devel libjpeg-devel freetype-devel openssl openssl-devel curl curl-devel libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl autoconf automake libaio*
+  yum -y install gcc gcc-c++ gcc-g77 make libtool autoconf patch unzip bzip2 automake fiex* libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl libpng libpng-devel libjpeg-devel openssl openssl-devel curl curl-devel libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl autoconf automake libaio*
   iptables -F
 elif [ "$ifcentos" != "" ];then
 #	if grep 5.10 /etc/issue;then
@@ -64,7 +64,7 @@ elif [ "$ifcentos" != "" ];then
   sed -i 's/^exclude/#exclude/' /etc/yum.conf
   yum makecache
   yum -y remove mysql MySQL-python perl-DBD-MySQL dovecot exim qt-MySQL perl-DBD-MySQL dovecot qt-MySQL mysql-server mysql-connector-odbc php-mysql mysql-bench libdbi-dbd-mysql mysql-devel-5.0.77-3.el5 httpd php mod_auth_mysql mailman squirrelmail php-pdo php-common php-mbstring php-cli &> /dev/null
-  yum -y install gcc gcc-c++ gcc-g77 make libtool autoconf patch unzip bzip2 automake libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl libpng libpng-devel libjpeg-devel freetype-devel openssl openssl-devel curl curl-devel libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl autoconf automake libaio*
+  yum -y install gcc gcc-c++ gcc-g77 make libtool autoconf patch unzip bzip2 automake libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl libpng libpng-devel libjpeg-devel openssl openssl-devel curl curl-devel libxml2 libxml2-devel ncurses ncurses-devel libtool-ltdl-devel libtool-ltdl autoconf automake libaio*
   yum -y update bash
   #ln -s /usr/lib64/mysql/libmysqlclient.so   /usr/lib/libmysqlclient.so   mysql-devel mysql
   #ln -s /usr/lib64/mysql/libmysqlclient_r.so   /usr/lib/libmysqlclient_r.so
