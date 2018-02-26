@@ -8,7 +8,7 @@
 #
 # processname: nginx
 # config:      /alidata/server/nginx/conf/nginx.conf
-# pidfile:     /alidata/server/logs/nginx.pid
+# pidfile:     /alidata/server/nginx/logs/nginx.pid
 
 # Source function library.
 . /etc/rc.d/init.d/functions
