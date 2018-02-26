@@ -35,13 +35,8 @@ fi
 /etc/init.d/mysqld stop &> /dev/null
 /etc/init.d/nginx stop &> /dev/null
 /etc/init.d/php-fpm stop &> /dev/null
-/etc/init.d/vsftpd stop &> /dev/null
-#/etc/init.d/httpd stop &> /dev/null
 killall mysqld &> /dev/null
 killall nginx &> /dev/null
-#killall httpd &> /dev/null
-#killall apache2 &> /dev/null
-killall vsftpd &> /dev/null
 killall php-fpm &> /dev/null
 
 echo "--------> Clean up the installation environment"
@@ -105,34 +100,13 @@ if [ "$ifrpm" != "" ];then
 	sed -i "/\/etc\/init\.d\/mysqld.*/d" /etc/rc.d/rc.local
 	sed -i "/\/etc\/init\.d\/nginx.*/d" /etc/rc.d/rc.local
 	sed -i "/\/etc\/init\.d\/php-fpm.*/d" /etc/rc.d/rc.local
-	sed -i "/\/etc\/init\.d\/vsftpd.*/d" /etc/rc.d/rc.local
-	#sed -i "/\/etc\/init\.d\/httpd.*/d" /etc/rc.d/rc.local
 else
 	sed -i "/\/etc\/init\.d\/mysqld.*/d" /etc/rc.local
 	sed -i "/\/etc\/init\.d\/nginx.*/d" /etc/rc.local
 	sed -i "/\/etc\/init\.d\/php-fpm.*/d" /etc/rc.local
-	sed -i "/\/etc\/init\.d\/vsftpd.*/d" /etc/rc.local
-	#sed -i "/\/etc\/init\.d\/httpd.*/d" /etc/rc.local
 fi
 
 echo ""
 echo "/etc/profile                    clean ok!"
 sed -i "/export PATH=\$PATH\:\/alidata\/server\/nginx\/sbin.*/d" /etc/profile
 source /etc/profile
-
-echo ""
-if [ "$ifrpm" != "" ];then
-	yum -y remove vsftpd  &> /dev/null
-	cp -f ./ftp/config-ftp/rpm_ftp/* /etc/vsftpd/
-	rm -f /etc/vsftpd/chroot_list
-	rm -f /etc/vsftpd/ftpusers
-	rm -f /etc/vsftpd/user_list
-	rm -f /etc/vsftpd/vsftpd.conf
-else
-	apt-get -y remove vsftpd
-	rm -f /etc/vsftpd.conf
-	rm -f /etc/vsftpd.chroot_list
-	rm -f /etc/vsftpd.user_list
-	rm -rf /etc/pam.d/vsftpd
-fi
-echo "vsftpd                    remove ok!"

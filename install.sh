@@ -3,8 +3,6 @@
 ####---- global variables ----begin####
 export tengine_version=2.2.2
 export mysql_version=5.6.38
-export vsftpd_version=2.2.2
-export install_ftp_version=0.0.0
 
 ####---- global variables ----end####
 web=nginx
@@ -31,7 +29,6 @@ fi
 export web
 export web_dir
 export mysql_dir=mysql-${mysql_version}
-export vsftpd_dir=vsftpd-${vsftpd_version}
 export php72_dir
 ####---- global variables ----end####
 
@@ -143,10 +140,6 @@ ln -s /alidata/server/$php72_dir  /alidata/server/php
 ./php/install_php_extension.sh
 echo "---------- php extension ok ----------" >> tmp.log
 
-./ftp/install_${vsftpd_dir}.sh
-install_ftp_version=$(vsftpd -v 0> vsftpd_version && cat vsftpd_version |awk -F: '{print $2}'|awk '{print $2}' && rm -f vsftpd_version)
-echo "---------- vsftpd-$install_ftp_version  ok ----------" >> tmp.log
-
 
 ####---- mysql password initialization ----begin####
 TMP_PASS=$(date | md5sum |head -c 10)
@@ -176,10 +169,6 @@ if ! cat /etc/rc.local | grep "/etc/init.d/nginx start" &> /dev/null;then
     echo "/etc/init.d/nginx start" >> /etc/rc.local
 fi
 
-
-if ! cat /etc/rc.local | grep "/etc/init.d/vsftpd" > /dev/null;then 
-    echo "/etc/init.d/vsftpd start" >> /etc/rc.local
-fi
 ####---- Start command is written to the rc.local ----end####
 echo "---------- rc init ok ----------" >> tmp.log
 
@@ -200,7 +189,6 @@ fi
 /etc/init.d/mysqld  restart &> /dev/null
 /etc/init.d/php-fpm restart &> /dev/null
 /etc/init.d/nginx restart &> /dev/null
-/etc/init.d/vsftpd restart &> /dev/null
 ####---- restart ----end####
 
 
