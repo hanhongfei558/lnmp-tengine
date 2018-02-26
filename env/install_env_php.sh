@@ -134,10 +134,6 @@ cat > account.log << END
 # 
 ##########################################################################
 
-FTP:
-account:www
-ftp_password:ftp_password_value
-
 MySQL:
 account:root
 mysql_password:mysql_password_value
