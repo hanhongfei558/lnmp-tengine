@@ -1,10 +1,11 @@
-#!/bin/sh
+#! /bin/bash
 #
-# nginx - this script starts and stops the nginx daemin
+# nginx - this script starts and stops the nginx daemon
 #
-# chkconfig:   - 85 15 
+# chkconfig:   - 85 15
 # description:  Nginx is an HTTP(S) server, HTTP(S) reverse \
 #               proxy and IMAP/POP3 proxy server
+#
 # processname: nginx
 # config:      /usr/local/nginx/conf/nginx.conf
 # pidfile:     /usr/local/nginx/logs/nginx.pid
@@ -23,11 +24,16 @@ prog=$(basename $nginx)
 
 NGINX_CONF_FILE="/alidata/server/nginx/conf/nginx.conf"
 
+[ -f /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
+
 lockfile=/var/lock/subsys/nginx
 
 start() {
     [ -x $nginx ] || exit 5
+    [ -f $NGINX_CONF_FILE ] || exit 6
     echo -n $"Starting $prog: "
+    mkdir -p /var/run/nginx/
+    mkdir -p /var/tmp/nginx/{client,proxy,fastcgi,uwsgi,scgi}
     daemon $nginx -c $NGINX_CONF_FILE
     retval=$?
     echo
@@ -45,11 +51,14 @@ stop() {
 }
 
 restart() {
+    configtest || return $?
     stop
+    sleep 1
     start
 }
 
 reload() {
+    configtest || return $?
     echo -n $"Reloading $prog: "
     killproc $nginx -HUP
     RETVAL=$?
