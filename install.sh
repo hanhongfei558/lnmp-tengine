@@ -6,7 +6,7 @@ export mysql_version=5.6.38
 
 ####---- global variables ----end####
 web=nginx
-php72=7.2.2
+php71=7.1.14
 
 
 ####---- Clean up the environment ----begin####
@@ -16,7 +16,7 @@ echo "will be installed, wait ..."
 
 
 web_dir=nginx-${tengine_version}
-php72_dir=php-${php72}
+php71_dir=php-${php71}
 
 if [ `uname -m` == "x86_64" ];then
 machine=x86_64
@@ -29,7 +29,7 @@ fi
 export web
 export web_dir
 export mysql_dir=mysql-${mysql_version}
-export php72_dir
+export php71_dir
 ####---- global variables ----end####
 
 
@@ -127,14 +127,14 @@ echo "---------- ${mysql_dir} ok ----------" >> tmp.log
 ./tengine/install_tengine.sh
 echo "---------- tengine-2.2.2 ok ----------" >> tmp.log
 ####install multi php####
-#$php72
-for php_version in $php72
+#$php71
+for php_version in $php71
 do
     ./php/install_nginx_php-${php_version}.sh
 done
 
 ####set default php version####
-ln -s /alidata/server/$php72_dir  /alidata/server/php
+ln -s /alidata/server/$php71_dir  /alidata/server/php
 
 ####install php extension####
 ./php/install_php_extension.sh

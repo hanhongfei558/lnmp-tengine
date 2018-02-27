@@ -7,7 +7,7 @@
 此安装包包含的软件及版本为：
 tengine：2.2.2
 mysql：5.6.38
-php：7.2.2
+php：7.1.14
 php扩展：redis
 ftp：（yum安装）
 
