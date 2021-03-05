@@ -91,6 +91,22 @@ fi
 make install
 cd ..
 
+if [ ! -f oniguruma-6.9.6.tar.gz ];then
+    wget https://github.com/kkos/oniguruma/archive/v6.9.6.tar.gz -O oniguruma-6.9.6.tar.gz
+fi
+rm -rf oniguruma-6.9.6
+tar zxvf oniguruma-6.9.6.tar.gz
+cd oniguruma-6.9.6
+./autogen.sh
+./configure --prefix=/usr --libdir=/lib64
+if [ $CPU_NUM -gt 1 ];then
+    make -j$CPU_NUM
+else
+    make
+fi
+make install
+cd ..
+
 if [ ! -f jpegsrc.v6b.tar.gz ];then
 	wget http://oss.aliyuncs.com/aliyunecs/onekey/jpegsrc.v6b.tar.gz
 fi
