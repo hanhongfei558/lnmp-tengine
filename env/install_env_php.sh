@@ -77,7 +77,7 @@ make install
 cd ..
 
 if [ ! -f pcre-8.41.tar.gz ];then
-	wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.41.tar.gz
+	wget https://ftp.pcre.org/pub/pcre/pcre-8.41.tar.gz
 fi
 rm -rf pcre-8.41
 tar zxvf pcre-8.41.tar.gz

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export PKG_CONFIG_PATH=/usr/local/freetype.2.8.1/lib/pkgconfig
-PHP_DIR=/alidata/server/php-7.2.2
+PHP_DIR=/alidata/server/php-7.4.16
 
 if [ `uname -m` == "x86_64" ];then
    machine=x86_64
@@ -10,12 +10,12 @@ else
 fi
 
 
-rm -rf php-7.2.2
-if [ ! -f php-7.2.2.tar.gz ];then
-  wget http://cn2.php.net/distributions/php-7.2.2.tar.gz
+rm -rf php-7.4.16
+if [ ! -f php-7.4.16.tar.gz ];then
+  wget http://cn2.php.net/distributions/php-7.4.16.tar.gz
 fi
-tar zxvf php-7.2.2.tar.gz
-cd php-7.2.2
+tar zxvf php-7.4.16.tar.gz
+cd php-7.4.16
 ./configure --prefix=$PHP_DIR \
 --enable-opcache \
 --with-config-file-path=$PHP_DIR/etc \
@@ -53,7 +53,7 @@ else
 fi
 make install
 cd ..
-cp ./php-7.2.2/php.ini-production $PHP_DIR/etc/php.ini
+cp ./php-7.4.16/php.ini-production $PHP_DIR/etc/php.ini
 #adjust php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 64M/g' $PHP_DIR/etc/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 64M/g' $PHP_DIR/etc/php.ini
@@ -74,6 +74,6 @@ sed -i 's,^pm.max_children = 5,pm.max_children = 100,g'   $PHP_DIR/etc/php-fpm.d
 sed -i 's,^pm.start_servers = 2,pm.start_servers = 20,g'   $PHP_DIR/etc/php-fpm.d/www.conf
 sed -i 's,;slowlog = log/$pool.log.slow,slowlog = /alidata/log/php/\$pool.log.slow,g'   $PHP_DIR/etc/php-fpm.conf
 
-install -v -m755 ./php-7.2.2/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
+install -v -m755 ./php-7.4.16/sapi/fpm/init.d.php-fpm  /etc/init.d/php-fpm
 /etc/init.d/php-fpm start
 sleep 5
