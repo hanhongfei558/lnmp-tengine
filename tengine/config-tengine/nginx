@@ -35,6 +35,7 @@ start() {
     mkdir -p /var/run/nginx/
     mkdir -p /var/tmp/nginx/{client,proxy,fastcgi,uwsgi,scgi}
     daemon $nginx -c $NGINX_CONF_FILE
+    sleep 0.1
     retval=$?
     echo
     [ $retval -eq 0 ] && touch $lockfile
