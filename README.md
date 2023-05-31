@@ -1,4 +1,4 @@
-当前版本version 1.5.0
+当前版本version 1.6.0
 
 ------------------------- 自动安装过程 -------------------------
 
@@ -29,7 +29,7 @@ cd lnmp-tengine
 ./install-nomysql.sh
 
 如果环境仅需要安装tengine则使用下面的脚本一键安装仅tengine的环境
-./install-only.sh
+./install-onlynginx.sh
 
 --------------------------- version 1.3.0 测试记录 --------------------------
 
