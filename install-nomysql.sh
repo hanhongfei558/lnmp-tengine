@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####---- global variables ----begin####
-export tengine_version=2.3.2
+export tengine_version=2.3.3
 export mysql_version=
 
 ####---- global variables ----end####
@@ -121,7 +121,7 @@ echo "---------- make dir ok ----------" >> tmp.log
 echo "---------- env ok ----------" >> tmp.log
 
 ./tengine/install_tengine.sh
-echo "---------- tengine-2.3.2 ok ----------" >> tmp.log
+echo "---------- tengine-2.3.3 ok ----------" >> tmp.log
 ####install multi php####
 #$php74
 for php_version in $php74
